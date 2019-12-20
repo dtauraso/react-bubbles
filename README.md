@@ -45,7 +45,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
 
-  create (Create), get (Read), post (Update), delete (Delete) 
+  create(credentials), post (Create), get (Read), put (Update), delete (Delete) 
 
 ## Project Set Up
 
