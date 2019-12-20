@@ -144,6 +144,7 @@ app.put("/api/colors/:id", authenticator, (req, res) => {
     }
     return color;
   });
+
   res.status(200).send(req.body);
 });
 

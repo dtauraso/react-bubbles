@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -16,11 +17,28 @@ const ColorList = ({ colors, updateColors }) => {
     setColorToEdit(color);
   };
 
-  const saveEdit = e => {
+  const saveEdit = (e, color) => {
     e.preventDefault();
+    // console.log(color)
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
+    // updateColors(colors.map(color => {
+    //   return color.code.hex === colorCode ? 
+      
+    // }))
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/colors/${color.id}`, color)
+      .then(res => {
+        console.log(res.data)
+        updateColors(colors.map(color => {
+
+          return color.id === res.data.id ? res.data : color
+        }))
+      })
+      .catch(err => {
+        console.log(err)
+      })
   };
 
   const deleteColor = color => {
@@ -51,7 +69,7 @@ const ColorList = ({ colors, updateColors }) => {
         ))}
       </ul>
       {editing && (
-        <form onSubmit={saveEdit}>
+        <form onSubmit={(e) => {saveEdit(e, colorToEdit)}}>
           <legend>edit color</legend>
           <label>
             color name:
